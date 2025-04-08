@@ -41,7 +41,7 @@ export default function Home() {
           {namecards.map((namecard) => (
             <div key={namecard.id} className="w-1/2 p-2">
               <div className="bg-white p-4 rounded-lg shadow-md">
-                <h2 className="text-lg font-bold">{namecard.name}</h2>
+                <h2 className="text-lg font-bold">{namecard.word}</h2>
               </div>
             </div>
           ))}
