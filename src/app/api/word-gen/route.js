@@ -25,7 +25,7 @@ export async function POST(request) {
   })
   const aiContent = completion.choices[0].message.content
 
-  const finalNamecardArray = aiContent.split('\n').map((item) => {
+  const finalStorycardArray = aiContent.split('\n').map((item) => {
     const id = item.split(':')[0]
     const word = item.split(':')[1]
     return {
@@ -34,5 +34,5 @@ export async function POST(request) {
     }
   })
 
-  return Response.json(finalNamecardArray)
+  return Response.json(finalStorycardArray)
 }
