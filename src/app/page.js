@@ -3,12 +3,12 @@ import { useState } from "react";
 
 export default function Home() {
 
-  const [flashcards, setFlashcards] = useState([])
-  const [topic, setTopic] = useState('')
+  const [namecards, setNamecards] = useState([])
+  const [topic, setTopic] = useState('ชื่อ')
   const [loading, setLoading] = useState(false)
 
 
-  const generateFlashcards = async (event) => {
+  const generateNamecards = async (event) => {
     event.preventDefault()
     setLoading(true)
     const response = await fetch('/api/word-gen', {
@@ -19,29 +19,29 @@ export default function Home() {
       })
     })
 
-    const flashcardsData = await response.json()
-    setFlashcards(flashcardsData)
+    const namecardsData = await response.json()
+    setNamecards(namecardsData)
     setLoading(false)
   }
 
   return (
-    <form onSubmit={generateFlashcards} className="flex flex-col gap-4 p-4">
-      <h1 className="text-2xl font-bold">Create Flash Card</h1>
-      <input type="text" placeholder="กรอกหัวข้อ Flash Card"
+    <form onSubmit={generateNamecards} className="flex flex-col gap-4 p-4">
+      <h1 className="text-2xl font-bold">Create Card</h1>
+      <input type="text" placeholder="กรอกหัวข้อในการตั้งชื่อ"
         name="topic"
         onChange={(event) => setTopic(event.target.value)}
         value={topic}
       />
       <button type="submit" disabled={loading}>
-        {loading ? 'Loading..' : 'สร้าง Flash Card'}
+        {loading ? 'Loading..' : 'สร้าง Card'}
       </button>
       คุณเลือกหัวข้อ {topic}
-      {flashcards ?
+      {namecards ?
         <div className="flex flex-wrap">
-          {flashcards.map((flashcard) => (
-            <div key={flashcard.id} className="w-1/2 p-2">
+          {namecards.map((namecard) => (
+            <div key={namecard.id} className="w-1/2 p-2">
               <div className="bg-white p-4 rounded-lg shadow-md">
-                <h2 className="text-lg font-bold">{flashcard.word}</h2>
+                <h2 className="text-lg font-bold">{namecard.name}</h2>
               </div>
             </div>
           ))}
