@@ -7,13 +7,11 @@ const openai = new OpenAI({
 export async function POST(request) {
   const data = await request.json()
   const topic = data.topic
-  const prompt = `Create set of words for 5 cards from this topic: ${topic}
+  const prompt = `Create 3 sentences of bedtime story from this topic: ${topic}
   Format as: 
-  1:word1
-  2:word2
-  3:word3
-  4:word4
-  5:word5
+  1:sentence1
+  2:sentence2
+  3:sentence3
   `
 
   const completion = await openai.chat.completions.create({

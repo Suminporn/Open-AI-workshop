@@ -3,12 +3,12 @@ import { useState } from "react";
 
 export default function Home() {
 
-  const [namecards, setNamecards] = useState([])
-  const [topic, setTopic] = useState('ชื่อ')
+  const [storycards, setStorycards] = useState([])
+  const [topic, setTopic] = useState('')
   const [loading, setLoading] = useState(false)
 
 
-  const generateNamecards = async (event) => {
+  const generateStorycards = async (event) => {
     event.preventDefault()
     setLoading(true)
     const response = await fetch('/api/word-gen', {
@@ -19,15 +19,15 @@ export default function Home() {
       })
     })
 
-    const namecardsData = await response.json()
-    setNamecards(namecardsData)
+    const storycardsData = await response.json()
+    setStorycards(storycardsData)
     setLoading(false)
   }
 
   return (
-    <form onSubmit={generateNamecards} className="flex flex-col gap-4 p-4">
-      <h1 className="text-2xl font-bold">Create Card</h1>
-      <input type="text" placeholder="กรอกหัวข้อในการตั้งชื่อ"
+    <form onSubmit={generateStorycards} className="flex flex-col gap-4 p-4">
+      <h1 className="text-2xl font-bold">Create Story</h1>
+      <input type="text" placeholder="กรอกหัวข้อในการแต่งนิทาน"
         name="topic"
         onChange={(event) => setTopic(event.target.value)}
         value={topic}
@@ -36,12 +36,12 @@ export default function Home() {
         {loading ? 'Loading..' : 'สร้าง Card'}
       </button>
       คุณเลือกหัวข้อ {topic}
-      {namecards ?
+      {storycards ?
         <div className="flex flex-wrap">
-          {namecards.map((namecard) => (
-            <div key={namecard.id} className="w-1/2 p-2">
+          {storycards.map((storycard) => (
+            <div key={storycard.id} className="w-1/2 p-2">
               <div className="bg-white p-4 rounded-lg shadow-md">
-                <h2 className="text-lg font-bold">{namecard.word}</h2>
+                <h2 className="text-lg font-bold">{storycard.word}</h2>
               </div>
             </div>
           ))}
